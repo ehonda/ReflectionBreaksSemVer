@@ -1,6 +1,6 @@
 # Overview
 
-This is a small proof of concept that [semantic versioning](https://semver.org/) can be "broken" (argueably not really - See [What does this mean?](what-does-this-mean)) in C# by using reflection.
+This is a small proof of concept that [semantic versioning](https://semver.org/) can be "broken" (argueably not really - See [What does this mean?](#what-does-this-mean)) in C# by using reflection.
 
 # How it works
 
