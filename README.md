@@ -1,6 +1,6 @@
 # Overview
 
-This is a small proof of concept that [semantic versioning](https://semver.org/) can be "broken" (depending on what you define to be backwards compatible, i.e. minor version updates) in C# by using reflection.
+This is a small proof of concept that [semantic versioning](https://semver.org/) can be "broken" (argueably not really - See [What does this mean?](what-does-this-mean?)) in C# by using reflection.
 
 # How it works
 
@@ -98,7 +98,7 @@ static bool Bar()
         .Length == 5;
 ```
 
-# What does that mean for versioning nugets
+# What does this mean?
 
 Probably nothing, but there's some things we can learn from this:
 
