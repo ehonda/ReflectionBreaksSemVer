@@ -1,5 +1,6 @@
 ﻿using SomeLib;
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -44,6 +45,12 @@ namespace ReflectionBreaksSemVer
 
         static void Main(string[] args)
         {
+            // Work around Visual Studio / dotnet run working directory inconsistency:
+            // https://github.com/dotnet/project-system/issues/3619
+            Directory.SetCurrentDirectory(
+                Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!);
+
+            // POC
             PrintLibraryInfo();
             Console.WriteLine();
             Console.WriteLine($"Foo: {Foo()}");
