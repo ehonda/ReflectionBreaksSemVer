@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SomeLib;
+using System;
 using System.Linq;
 using System.Reflection;
 
@@ -15,24 +16,29 @@ namespace ReflectionBreaksSemVer
             foreach (var type in types)
             {
                 Console.WriteLine($"{type.FullName}");
+                Console.WriteLine();
                 foreach (var method in type.GetMethods())
                 {
                     Console.WriteLine($"{method.Name}");
                 }
+                Console.WriteLine();
+                Console.WriteLine("-----------------------");
             }
         }
 
-        static bool BrokenByAdditionalType()
+        // Broken by an additional type exported from SomeLib
+        static bool Foo()
             => Assembly
                 .LoadFrom("SomeLib.dll")
                 .ExportedTypes
                 .Count() == 1;
 
-        static bool BrokenByAdditionalMethod()
+        // Broken by an additional method provided by ClassA
+        static bool Bar()
             => Assembly
                 .LoadFrom("SomeLib.dll")
                 .ExportedTypes
-                .Single(type => type.Name == "ClassA")
+                .Single(type => type.Name == nameof(ClassA))
                 .GetMethods()
                 .Length == 5;
 
@@ -40,8 +46,8 @@ namespace ReflectionBreaksSemVer
         {
             PrintLibraryInfo();
             Console.WriteLine();
-            Console.WriteLine($"{BrokenByAdditionalType()}");
-            Console.WriteLine($"{BrokenByAdditionalMethod()}");
+            Console.WriteLine($"Foo: {Foo()}");
+            Console.WriteLine($"Bar: {Bar()}");
         }
     }
 }
